@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/store'
-import { renderIcon } from '@/utils/icon'
-import IconBookOpen from '~icons/icon-park-outline/book-open'
-import IconGithub from '~icons/icon-park-outline/github'
 import IconLogout from '~icons/icon-park-outline/logout'
 import IconUser from '~icons/icon-park-outline/user'
 
@@ -17,25 +14,6 @@ const options = computed(() => {
       label: t('app.userCenter'),
       key: 'userCenter',
       icon: () => h(IconUser),
-    },
-    {
-      type: 'divider',
-      key: 'd1',
-    },
-    {
-      label: 'Github',
-      key: 'guthub',
-      icon: () => h(IconGithub),
-    },
-    {
-      label: 'Gitee',
-      key: 'gitee',
-      icon: renderIcon('simple-icons:gitee'),
-    },
-    {
-      label: 'Docs',
-      key: 'docs',
-      icon: () => h(IconBookOpen),
     },
     {
       type: 'divider',
@@ -62,15 +40,6 @@ function handleSelect(key: string | number) {
   }
   if (key === 'userCenter')
     router.push('/userCenter')
-
-  if (key === 'guthub')
-    window.open('https://github.com/chansee97/nova-admin')
-
-  if (key === 'gitee')
-    window.open('https://gitee.com/chansee97/nova-admin')
-
-  if (key === 'docs')
-    window.open('https://nova-admin-docs.pages.dev/')
 }
 </script>
 

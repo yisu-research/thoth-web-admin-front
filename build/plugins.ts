@@ -75,7 +75,7 @@ export function createVitePlugins(env: ImportMetaEnv) {
       customCollections: {
         'svg-icons': FileSystemIconLoader(
           'src/assets/svg-icons',
-          svg => svg.replace(/^<svg /, '<svg fill="currentColor" width="1.2em" height="1.2em"'),
+          svg => svg.replace(/^<svg /, '<svg width="1.2em" height="1.2em"'),
         ),
       },
     }),

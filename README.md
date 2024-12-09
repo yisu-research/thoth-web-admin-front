@@ -1,11 +1,7 @@
 <div align="center">
-<img src="./src/assets/svg/logo.svg" style="width:150px"/>
+<img src="./src/assets/svg-icons/logo.svg" style="width:150px"/>
     <h1>Thoth Admin</h1>
 </div>
-
-## 介绍
-
-Thoth Admin 是一个基于Vue3、Vite5、TypeScript、NaiveUI、Unocss等最新技术栈开发的后台管理模板，用简单的方式实现完整功能，并尽可能的考虑代码规范，易读易理解无过度封装，方便二次开发。
 
 ## 安装使用
 

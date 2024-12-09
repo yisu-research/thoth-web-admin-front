@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Login, Register, ResetPwd } from './components'
 
-  type IformType = 'login' | 'register' | 'resetPwd'
+type IformType = 'login' | 'register' | 'resetPwd'
 const formType: Ref<IformType> = ref('login')
 const formComponets = {
   login: Login,
@@ -37,7 +37,6 @@ const appName = import.meta.env.VITE_APP_NAME
         </transition>
       </div>
     </n-el>
-
     <div />
   </n-el>
 </template>
