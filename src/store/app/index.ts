@@ -56,7 +56,6 @@ export const useAppStore = defineStore('app-store', {
     // 重置所有设置
     resetAlltheme() {
       this.theme = themeConfig
-      this.primaryColor = '#18a058'
       this.collapsed = false
       this.grayMode = false
       this.colorWeak = false

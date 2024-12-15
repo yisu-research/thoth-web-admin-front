@@ -44,7 +44,7 @@
     flex-direction: column;
     gap: 15vh;
     position: fixed;
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     z-index: 1;
   }
   .boxes {
@@ -93,7 +93,7 @@
   }
 
   .boxes .box > div {
-    --background: #5c8df6;
+    --background: #18E19EFF;
     --top: auto;
     --right: auto;
     --bottom: auto;
@@ -118,13 +118,13 @@
   }
 
   .boxes .box > div:nth-child(2) {
-    --background: #145af2;
+    --background: #23c891;
     --right: 0;
     --rotateY: 90deg;
   }
 
   .boxes .box > div:nth-child(3) {
-    --background: #447cf5;
+    --background: #4EF2BCFF;
     --rotateX: -90deg;
   }
 

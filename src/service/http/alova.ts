@@ -8,7 +8,6 @@ import {
   DEFAULT_BACKEND_OPTIONS,
 } from './config'
 import {
-  handleBusinessError,
   handleRefreshToken,
   handleResponseError,
   handleServiceResult,
@@ -74,13 +73,14 @@ export function createAlovaInstance(
 
           // 返回json数据
           const apiData = await response.json()
+          return handleServiceResult(apiData)
           // 请求成功
-          if (apiData[_backendConfig.codeKey] === _backendConfig.successCode)
-            return handleServiceResult(apiData)
+          // if (apiData[_backendConfig.codeKey] === _backendConfig.successCode)
+          //   return handleServiceResult(apiData)
 
-          // 业务请求失败
-          const errorResult = handleBusinessError(apiData, _backendConfig)
-          return handleServiceResult(errorResult, false)
+          // // 业务请求失败
+          // const errorResult = handleBusinessError(apiData, _backendConfig)
+          // return handleServiceResult(errorResult, false)
         }
         // 接口请求失败
         const errorResult = handleResponseError(response)

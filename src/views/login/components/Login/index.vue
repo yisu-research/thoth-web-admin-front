@@ -3,13 +3,13 @@ import type { FormInst } from 'naive-ui'
 import { useAuthStore } from '@/store'
 import { local } from '@/utils'
 
-const emit = defineEmits(['update:modelValue'])
+// const emit = defineEmits(['update:modelValue'])
 
 const authStore = useAuthStore()
 
-function toOtherForm(type: any) {
-  emit('update:modelValue', type)
-}
+// function toOtherForm(type: any) {
+//   emit('update:modelValue', type)
+// }
 
 const { t } = useI18n()
 const rules = computed(() => {
@@ -19,7 +19,7 @@ const rules = computed(() => {
       trigger: 'blur',
       message: t('login.accountRuleTip'),
     },
-    pwd: {
+    password: {
       required: true,
       trigger: 'blur',
       message: t('login.passwordRuleTip'),
@@ -27,8 +27,8 @@ const rules = computed(() => {
   }
 })
 const formValue = ref({
-  account: 'super',
-  pwd: '123456',
+  account: 'admin',
+  password: 'admin2024',
 })
 const isRemember = ref(false)
 const isLoading = ref(false)
@@ -40,13 +40,13 @@ function handleLogin() {
       return
 
     isLoading.value = true
-    const { account, pwd } = formValue.value
+    const { account, password } = formValue.value
 
     if (isRemember.value)
-      local.set('loginAccount', { account, pwd })
+      local.set('loginAccount', { account, password })
     else local.remove('loginAccount')
 
-    await authStore.login(account, pwd)
+    await authStore.login(account, password)
     isLoading.value = false
   })
 }
@@ -73,7 +73,7 @@ function checkUserAccount() {
         <n-input v-model:value="formValue.account" clearable :placeholder="$t('login.accountPlaceholder')" />
       </n-form-item>
       <n-form-item path="pwd">
-        <n-input v-model:value="formValue.pwd" type="password" :placeholder="$t('login.passwordPlaceholder')" clearable show-password-on="click">
+        <n-input v-model:value="formValue.password" type="password" :placeholder="$t('login.passwordPlaceholder')" clearable show-password-on="click">
           <template #password-invisible-icon>
             <icon-park-outline-preview-close-one />
           </template>
@@ -87,19 +87,19 @@ function checkUserAccount() {
           <n-checkbox v-model:checked="isRemember">
             {{ $t('login.rememberMe') }}
           </n-checkbox>
-          <n-button type="primary" text @click="toOtherForm('resetPwd')">
+          <!-- <n-button type="primary" text @click="toOtherForm('resetPwd')">
             {{ $t('login.forgotPassword') }}
-          </n-button>
+          </n-button> -->
         </div>
         <n-button block type="primary" size="large" :loading="isLoading" :disabled="isLoading" @click="handleLogin">
           {{ $t('login.signIn') }}
         </n-button>
-        <n-flex>
+        <!-- <n-flex>
           <n-text>{{ $t('login.noAccountText') }}</n-text>
           <n-button type="primary" text @click="toOtherForm('register')">
             {{ $t('login.signUp') }}
           </n-button>
-        </n-flex>
+        </n-flex> -->
       </n-space>
     </n-form>
   </div>
