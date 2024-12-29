@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ThothSmartAvatar } from '@/components/common'
 import { useAuthStore } from '@/store'
 import IconLogout from '~icons/icon-park-outline/logout'
 import IconUser from '~icons/icon-park-outline/user'
@@ -49,17 +50,12 @@ function handleSelect(key: string | number) {
     :options="options"
     @select="handleSelect"
   >
-    <n-avatar
-      round
-
-      :src="userInfo?.avatar"
-    >
-      <template #fallback>
-        <div class="wh-full flex-center">
-          <icon-park-outline-user />
-        </div>
-      </template>
-    </n-avatar>
+    <ThothSmartAvatar
+      :name="userInfo?.username"
+      :size="28"
+      :src="userInfo?.avatarUrl"
+      shape="circle"
+    />
   </n-dropdown>
 </template>
 

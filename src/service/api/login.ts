@@ -13,8 +13,8 @@ export function fetchLogin(data: Ilogin) {
   return methodInstance
 }
 
-export function fetchUserInfo(params: { id: number }) {
-  const methodInstance = request.Get(`admin/users/${params.id}`)
+export function fetchUserInfo() {
+  const methodInstance = request.Get(`users/current`)
   return methodInstance
 }
 

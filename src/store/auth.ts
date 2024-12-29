@@ -61,7 +61,7 @@ export const useAuthStore = defineStore('auth-store', {
 
         await this.handleToken({ accessToken: token })
 
-        const { isSuccess: isSuccessUserInfo, ...data } = await fetchUserInfo({ id: 2 })
+        const { isSuccess: isSuccessUserInfo, ...data } = await fetchUserInfo()
 
         if (!isSuccessUserInfo)
           return

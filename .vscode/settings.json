@@ -50,5 +50,9 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.localesPaths": [
     "locales"
-  ]
+  ],
+  "workbench.colorCustomizations": {
+    "minimap.background": "#00000000",
+    "scrollbar.shadow": "#00000000"
+  }
 }

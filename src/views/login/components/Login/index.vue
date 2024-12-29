@@ -27,7 +27,7 @@ const rules = computed(() => {
   }
 })
 const formValue = ref({
-  account: 'admin',
+  account: 'admin@yisukeyan.com',
   password: 'admin2024',
 })
 const isRemember = ref(false)
