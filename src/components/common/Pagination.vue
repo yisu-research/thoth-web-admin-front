@@ -24,7 +24,7 @@ function changePage() {
     v-if="count > 0"
     v-model:page="page"
     v-model:page-size="pageSize"
-    :page-sizes="[10, 20, 30, 50]"
+    :page-sizes="[2, 5, 10, 20, 30, 50]"
     :item-count="count"
     :display-order="displayOrder"
     show-size-picker

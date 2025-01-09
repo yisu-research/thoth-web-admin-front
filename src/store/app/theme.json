@@ -19,8 +19,6 @@
     "errorColor": "#d03050",
     "errorColorHover": "#de576d",
     "errorColorPressed": "#ab1f3f",
-    "errorColorSuppl": "#de576d",
-
-    "borderRadius": "0.75rem"
+    "errorColorSuppl": "#de576d"
   }
 }

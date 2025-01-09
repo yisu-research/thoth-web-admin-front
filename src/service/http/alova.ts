@@ -66,14 +66,20 @@ export function createAlovaInstance(
       onSuccess: async (response, method) => {
         const { status } = response
 
-        if (status === 200) {
+        if (status < 300 && status >= 200) {
           // 返回blob数据
           if (method.meta?.isBlob)
             return response.blob()
 
           // 返回json数据
-          const apiData = await response.json()
-          return handleServiceResult(apiData)
+          try {
+            const apiData = await response.json()
+            return handleServiceResult(apiData)
+          }
+          catch (error) {
+            console.error(error)
+            return handleServiceResult(null)
+          }
           // 请求成功
           // if (apiData[_backendConfig.codeKey] === _backendConfig.successCode)
           //   return handleServiceResult(apiData)

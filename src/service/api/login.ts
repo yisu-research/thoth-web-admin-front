@@ -14,12 +14,12 @@ export function fetchLogin(data: Ilogin) {
 }
 
 export function fetchUserInfo() {
-  const methodInstance = request.Get(`users/current`)
+  const methodInstance = request.Get(`/admin/users/current`)
   return methodInstance
 }
 
 export function fetchUpdateToken(data: any) {
-  const method = request.Post<Service.ResponseResult<Api.Login.Info>>('/updateToken', data)
+  const method = request.Post<Service.ResponseResult<Api.Login.Info>>('/admin/updateToken', data)
   method.meta = {
     authRole: 'refreshToken',
   }
