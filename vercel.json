@@ -1,40 +1,9 @@
 {
   "version": 2,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://my-thoth-web-admin.vercel.app"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,DELETE,PATCH,OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
-        },
-        {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true"
-        },
-        {
-          "key": "Access-Control-Max-Age",
-          "value": "86400"
-        }
-      ]
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "http://8.142.167.132:3002/api/:path*"
     }
-  ],
-  "env": {
-    "VITE_API_URL": "http://8.142.167.132:3002/api/",
-    "NODE_ENV": "production"
-  }
+  ]
 }
