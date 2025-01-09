@@ -2,7 +2,7 @@
   "version": 2,
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
@@ -10,15 +10,19 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,DELETE,OPTIONS"
+          "value": "GET,POST,PUT,DELETE,PATCH,OPTIONS"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization, X-Requested-With"
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
         },
         {
           "key": "Access-Control-Allow-Credentials",
           "value": "true"
+        },
+        {
+          "key": "Access-Control-Max-Age",
+          "value": "86400"
         }
       ]
     }
@@ -26,7 +30,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://8.142.167.132:3002/:path*"
+      "destination": "http://8.142.167.132:3002/api/:path*"
     }
-  ]
+  ],
+  "env": {
+    "VITE_API_URL": "http://8.142.167.132:3002/api/",
+    "NODE_ENV": "production"
+  }
 }
