@@ -2,12 +2,9 @@
 import { useAppStore, useRouteStore } from '@/store'
 import {
   BackTop,
-  FullScreen,
   Logo,
   Menu,
-  Notices,
   Search,
-  Setting,
   TabBar,
   UserCenter,
 } from './components'
@@ -28,11 +25,11 @@ const appStore = useAppStore()
           <Menu mode="horizontal" responsive />
           <div class="flex-y-center gap-1 h-full p-x-xl">
             <Search />
-            <Notices />
-            <FullScreen />
+            <!-- <Notices /> -->
+            <!-- <FullScreen /> -->
             <DarkModeSwitch />
-            <LangsSwitch />
-            <Setting />
+            <!-- <LangsSwitch /> -->
+            <!-- <Setting /> -->
             <UserCenter />
           </div>
         </div>
