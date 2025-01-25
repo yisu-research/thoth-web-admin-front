@@ -18,6 +18,11 @@ export function fetchUserInfo() {
   return methodInstance
 }
 
+export function fetchUpdateUserInfo(data: any) {
+  const methodInstance = request.Put<Service.ResponseResult<any>>(`/admin/users/current`, data)
+  return methodInstance
+}
+
 export function fetchUpdateToken(data: any) {
   const method = request.Post<Service.ResponseResult<Api.Login.Info>>('/admin/updateToken', data)
   method.meta = {

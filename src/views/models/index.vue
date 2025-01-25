@@ -56,6 +56,11 @@ const columns: DataTableColumns<any> = [
     key: 'label',
   },
   {
+    title: '价格',
+    align: 'center',
+    key: 'price',
+  },
+  {
     title: '模型描述',
     align: 'center',
     key: 'description',
@@ -79,17 +84,6 @@ const columns: DataTableColumns<any> = [
       return h(NSwitch, {
         value: row.is_recommend,
         onChange: value => updateModel(row, 'is_recommend', value),
-      })
-    },
-  },
-  {
-    title: '是否免费',
-    align: 'center',
-    key: 'is_free',
-    render: (row) => {
-      return h(NSwitch, {
-        value: row.is_free,
-        onChange: value => updateModel(row, 'is_free', value),
       })
     },
   },

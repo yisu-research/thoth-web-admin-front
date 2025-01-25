@@ -4,11 +4,7 @@ import { useAppStore, useRouteStore } from '@/store'
 import {
   BackTop,
   CollapaseButton,
-  FullScreen,
   Logo,
-  Notices,
-  Search,
-  Setting,
   TabBar,
   UserCenter,
 } from './components'
@@ -111,12 +107,7 @@ function updateTopMenu(key: string) {
             @update:value="updateTopMenu"
           />
           <div class="flex-y-center gap-1 h-full p-x-xl">
-            <Search />
-            <Notices />
-            <FullScreen />
             <DarkModeSwitch />
-            <LangsSwitch />
-            <Setting />
             <UserCenter />
           </div>
         </div>

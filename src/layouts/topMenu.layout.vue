@@ -4,7 +4,6 @@ import {
   BackTop,
   Logo,
   Menu,
-  Search,
   TabBar,
   UserCenter,
 } from './components'
@@ -24,12 +23,7 @@ const appStore = useAppStore()
           <Logo v-if="appStore.showLogo" />
           <Menu mode="horizontal" responsive />
           <div class="flex-y-center gap-1 h-full p-x-xl">
-            <Search />
-            <!-- <Notices /> -->
-            <!-- <FullScreen /> -->
             <DarkModeSwitch />
-            <!-- <LangsSwitch /> -->
-            <!-- <Setting /> -->
             <UserCenter />
           </div>
         </div>
