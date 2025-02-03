@@ -41,7 +41,7 @@ function changePage(page: number, size: number) {
 
 const columns: DataTableColumns<Entity.User> = [
   {
-    title: '头像',
+    title: 'Avatar',
     align: 'center',
     key: 'avatar',
     render: (row) => {
@@ -54,17 +54,17 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '用户名',
+    title: 'Username',
     align: 'center',
     key: 'username',
   },
   {
-    title: '邮箱',
+    title: 'Email',
     align: 'center',
     key: 'email',
   },
   {
-    title: '角色',
+    title: 'Role',
     align: 'center',
     key: 'role',
     render: (row) => {
@@ -72,7 +72,7 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '审核状态',
+    title: 'Audit Status',
     align: 'center',
     key: 'approval_status',
     render: (row) => {
@@ -92,7 +92,7 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '创建时间',
+    title: 'Created Time',
     align: 'center',
     key: 'created_at',
     render: (row) => {
@@ -100,7 +100,7 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '更新时间',
+    title: 'Updated Time',
     align: 'center',
     key: 'updated_at',
     render: (row) => {
@@ -108,7 +108,7 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '操作',
+    title: 'Actions',
     align: 'center',
     key: 'actions',
     render: (row) => {
@@ -118,12 +118,12 @@ const columns: DataTableColumns<Entity.User> = [
             size="small"
             onClick={() => handleEditTable(row)}
           >
-            编辑
+            Edit
           </NButton>
           <NPopconfirm onPositiveClick={() => handleDeleteUser(row.id)}>
             {{
-              default: () => '确认删除',
-              trigger: () => <NButton size="small">删除</NButton>,
+              default: () => 'Confirm delete',
+              trigger: () => <NButton size="small">Delete</NButton>,
             }}
           </NPopconfirm>
         </NSpace>
@@ -141,7 +141,7 @@ async function handleAuditUser(id: number, value: boolean) {
     if (!isSuccess)
       return
 
-    window.$message.success('审核用户成功')
+    window.$message.success('Audit user successfully')
     getUsers()
   }
   catch (error) {
@@ -188,7 +188,7 @@ async function handleCreateUser(data: any) {
     if (!isSuccess)
       return
 
-    window.$message.success('创建用户成功')
+    window.$message.success('Create user successfully')
     getUsers()
   }
   catch (error) {
@@ -201,7 +201,7 @@ async function handleUpdateUser(data: any) {
     if (!isSuccess)
       return
 
-    window.$message.success('更新用户成功')
+    window.$message.success('Update user successfully')
     getUsers()
   }
   catch (error) {
@@ -213,7 +213,7 @@ async function handleDeleteUser(id: number) {
   try {
     await fetchDeleteUser({ id })
 
-    window.$message.success('删除用户成功')
+    window.$message.success('Delete user successfully')
     getUsers()
   }
   catch (error) {
@@ -229,7 +229,7 @@ async function handleDeleteUser(id: number) {
         <template #icon>
           <nova-icon icon="hugeicons:user-add-01" :size="16" />
         </template>
-        添加用户
+        Add User
       </NButton>
     </div>
     <NCard>

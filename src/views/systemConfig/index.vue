@@ -65,18 +65,18 @@ onMounted(() => {
   <div>
     <div class="flex justify-start mb-4">
       <NButton type="primary" @click="openModal">
-        更新系统配置
+        Update System Configuration
       </NButton>
 
-      <NModal v-model:show="showModal" title="更新系统配置" @close="handleClose">
-        <NCard title="更新系统配置" style="width: 600px;">
+      <NModal v-model:show="showModal" title="Update System Configuration" @close="handleClose">
+        <NCard title="Update System Configuration" style="width: 600px;">
           <NForm
             :model="configForm"
           >
-            <NFormItem label="系统名称">
+            <NFormItem label="System Name">
               <NInput v-model:value="configForm.system_name" />
             </NFormItem>
-            <NFormItem label="系统Logo">
+            <NFormItem label="System Logo">
               <!-- {{ fileList }} -->
               <!-- <NUpload
               v-model:value="configForm.logo"
@@ -91,17 +91,17 @@ onMounted(() => {
             /> -->
               <NInput v-model:value="configForm.logo" />
             </NFormItem>
-            <NFormItem label="管理员邮箱">
+            <NFormItem label="Admin Email">
               <NInput v-model:value="configForm.admin_email" />
             </NFormItem>
-            <NFormItem label="网站地址">
+            <NFormItem label="Website URL">
               <NInput v-model:value="configForm.website_url" />
             </NFormItem>
           </NForm>
 
           <div>
             <NButton type="primary" @click="handleSubmit">
-              更新
+              Update
             </NButton>
           </div>
         </NCard>
@@ -110,26 +110,26 @@ onMounted(() => {
     <n-descriptions label-placement="top" bordered :column="6">
       <n-descriptions-item :span="3">
         <template #label>
-          系统名称
+          System Name
         </template>
         {{ config.system_name }}
       </n-descriptions-item>
       <n-descriptions-item :span="3">
         <template #label>
-          系统Logo
+          System Logo
         </template>
-        <img v-if="config.logo" :src="config.logo" alt="系统Logo" style="width: 100px; height: 100px;">
+        <img v-if="config.logo" :src="config.logo" alt="System Logo" style="width: 100px; height: 100px;">
         <NEmpty v-else />
       </n-descriptions-item>
       <n-descriptions-item :span="6">
         <template #label>
-          管理员邮箱
+          Admin Email
         </template>
         {{ config.admin_email }}
       </n-descriptions-item>
       <n-descriptions-item :span="6">
         <template #label>
-          网站地址
+          Website URL
         </template>
         {{ config.website_url }}
       </n-descriptions-item>

@@ -46,27 +46,27 @@ const columns: DataTableColumns<any> = [
     render: (row) => {
       return h('img', {
         src: row.icon_url,
-        class: 'w-8 h-8',
+        class: 'size-10 rounded-xl object-cover p-1 flex-shrink-0',
       })
     },
   },
   {
-    title: '模型名称',
+    title: 'Model Name',
     align: 'center',
     key: 'label',
   },
   {
-    title: '价格',
+    title: 'Price',
     align: 'center',
     key: 'price',
   },
   {
-    title: '模型描述',
+    title: 'Model Description',
     align: 'center',
     key: 'description',
   },
   {
-    title: '是否启用',
+    title: 'Enabled',
     align: 'center',
     key: 'is_enable',
     render: (row) => {
@@ -77,7 +77,7 @@ const columns: DataTableColumns<any> = [
     },
   },
   {
-    title: '是否推荐',
+    title: 'Recommended',
     align: 'center',
     key: 'is_recommend',
     render: (row) => {
@@ -95,7 +95,7 @@ async function updateModel(row: any, key: string, value: boolean) {
     if (!isSuccess)
       return
 
-    window.$message.success('更新模型成功')
+    window.$message.success('Update model successfully')
     getModels()
   }
   catch (error) {

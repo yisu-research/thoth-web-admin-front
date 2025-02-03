@@ -5,18 +5,18 @@ import { useAuthStore } from '@/store'
 const authStore = useAuthStore()
 
 const { userInfo } = authStore
-const formRef = ref()
-const formValue = ref({
-  password: '',
-})
+// const formRef = ref()
+// const formValue = ref({
+//   password: '',
+// })
 
-function handleValidateClick() {
-  formRef.value?.validate((errors: any) => {
-    if (!errors)
-      window.$message.success('验证通过')
-    else window.$message.error('验证不通过')
-  })
-}
+// function handleValidateClick() {
+//   formRef.value?.validate((errors: any) => {
+//     if (!errors)
+//       window.$message.success('Validation passed')
+//     else window.$message.error('Validation failed')
+//   })
+// }
 </script>
 
 <template>
@@ -32,13 +32,13 @@ function handleValidateClick() {
         />
 
         <div class="w-full">
-          <n-descriptions label-placement="left" :column="2" title="个人信息">
-            <n-descriptions-item label="用户名">
+          <n-descriptions label-placement="left" :column="2" title="Personal Information">
+            <n-descriptions-item label="Username">
               <p>
                 {{ userInfo?.username }}
               </p>
             </n-descriptions-item>
-            <n-descriptions-item label="角色">
+            <n-descriptions-item label="Role">
               <p>
                 {{ userInfo?.role }}
               </p>
@@ -47,7 +47,7 @@ function handleValidateClick() {
         </div>
       </div>
     </n-card>
-    <n-card title="修改密码">
+    <!-- <n-card title="修改密码">
       <n-space justify="center">
         <n-form ref="formRef" class="w-500px" :label-width="80" :model="formValue">
           <n-form-item label="新密码" path="password">
@@ -60,7 +60,7 @@ function handleValidateClick() {
           </n-form-item>
         </n-form>
       </n-space>
-    </n-card>
+    </n-card> -->
   </n-space>
 </template>
 

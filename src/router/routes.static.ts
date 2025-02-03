@@ -2,7 +2,7 @@ export const staticRoutes: AppRoute.RowRoute[] = [
   {
     name: 'userCenter',
     path: '/userCenter',
-    title: '个人中心',
+    title: 'Personal Center',
     requiresAuth: true,
     icon: 'hugeicons:ai-user',
     componentPath: '/userCenter/index.vue',
@@ -12,7 +12,7 @@ export const staticRoutes: AppRoute.RowRoute[] = [
   {
     name: 'users',
     path: '/users',
-    title: '用户管理',
+    title: 'User Management',
     requiresAuth: true,
     icon: 'hugeicons:user-multiple-02',
     componentPath: '/users/index.vue',
@@ -22,7 +22,7 @@ export const staticRoutes: AppRoute.RowRoute[] = [
   {
     name: 'credit',
     path: '/credit',
-    title: '积分管理',
+    title: 'Credit Management',
     requiresAuth: true,
     icon: 'hugeicons:credit-card-validation',
     componentPath: '/credit/index.vue',
@@ -32,7 +32,7 @@ export const staticRoutes: AppRoute.RowRoute[] = [
   {
     name: 'models',
     path: '/models',
-    title: '模型管理',
+    title: 'Models Management',
     requiresAuth: true,
     icon: 'hugeicons:archive-02',
     componentPath: '/models/index.vue',
@@ -42,7 +42,7 @@ export const staticRoutes: AppRoute.RowRoute[] = [
   {
     name: 'systemConfig',
     path: '/systemConfig',
-    title: '系统配置',
+    title: 'System Configuration',
     requiresAuth: true,
     icon: 'hugeicons:solar-system-01',
     componentPath: '/systemConfig/index.vue',

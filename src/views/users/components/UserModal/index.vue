@@ -20,10 +20,10 @@ interface Emits {
   (e: 'submit', type: ModalType, data: any): void
 }
 const defaultFormModal: any = {
-  username: 'test',
-  email: 'test@test.com',
-  password: 'mimadh46',
-  password_confirmation: 'mimadh46',
+  username: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
   avatar_url: '',
 }
 
@@ -44,8 +44,8 @@ function closeModal(visible = false) {
 
 const title = computed(() => {
   const titles: Record<ModalType, string> = {
-    add: '添加用户',
-    edit: '编辑用户',
+    add: 'Add User',
+    edit: 'Edit User',
   }
   return titles[type]
 })
@@ -98,16 +98,16 @@ watch(
       @submit.prevent="handleSubmit"
     >
       <n-grid :cols="24" :x-gap="18">
-        <n-form-item-grid-item :span="12" label="用户名" path="username">
+        <n-form-item-grid-item :span="12" label="Username" path="username">
           <n-input v-model:value="formModel.username" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="邮箱" path="email">
+        <n-form-item-grid-item :span="12" label="Email" path="email">
           <n-input v-model:value="formModel.email" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="密码" path="password">
+        <n-form-item-grid-item :span="12" label="Password" path="password">
           <n-input v-model:value="formModel.password" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="确认密码" path="password_confirmation">
+        <n-form-item-grid-item :span="12" label="Password Confirmation" path="password_confirmation">
           <n-input v-model:value="formModel.password_confirmation" />
         </n-form-item-grid-item>
       </n-grid>
@@ -115,10 +115,10 @@ watch(
     <template #action>
       <n-space justify="center">
         <n-button @click="closeModal()">
-          取消
+          Cancel
         </n-button>
         <n-button type="primary" @click="handleSubmit">
-          提交
+          Submit
         </n-button>
       </n-space>
     </template>

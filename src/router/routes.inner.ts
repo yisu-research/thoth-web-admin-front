@@ -14,7 +14,7 @@ export const routes: RouteRecordRaw[] = [
     name: 'login',
     component: () => import('@/views/login/index.vue'), // 注意这里要带上 文件后缀.vue
     meta: {
-      title: '登录',
+      title: 'Login',
       withoutTab: true,
     },
   },
@@ -23,7 +23,7 @@ export const routes: RouteRecordRaw[] = [
     name: '403',
     component: () => import('@/views/error/403/index.vue'),
     meta: {
-      title: '用户无权限',
+      title: 'User has no permission',
       withoutTab: true,
     },
   },
@@ -32,7 +32,7 @@ export const routes: RouteRecordRaw[] = [
     name: '404',
     component: () => import('@/views/error/404/index.vue'),
     meta: {
-      title: '找不到页面',
+      title: 'Page not found',
       icon: 'icon-park-outline:ghost',
       withoutTab: true,
     },
@@ -42,7 +42,7 @@ export const routes: RouteRecordRaw[] = [
     name: '500',
     component: () => import('@/views/error/500/index.vue'),
     meta: {
-      title: '服务器错误',
+      title: 'Server error',
       icon: 'icon-park-outline:close-wifi',
       withoutTab: true,
     },
@@ -52,7 +52,7 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/error/404/index.vue'),
     name: '404',
     meta: {
-      title: '找不到页面',
+      title: 'Page not found',
       icon: 'icon-park-outline:ghost',
       withoutTab: true,
     },

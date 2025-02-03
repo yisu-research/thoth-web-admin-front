@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import logo from '@/assets/logo.png'
 import { Login, Register, ResetPwd } from './components'
 
 type IformType = 'login' | 'register' | 'resetPwd'
@@ -16,14 +17,15 @@ const appName = import.meta.env.VITE_APP_NAME
   <n-el class="wh-full flex-center" style="background-color: var(--body-color);">
     <div class="fixed top-40px right-40px text-lg">
       <DarkModeSwitch />
-      <LangsSwitch />
+      <!-- <LangsSwitch /> -->
     </div>
     <n-el
       class="p-4xl h-full w-full sm:w-450px sm:h-700px"
       style="background: var(--card-color);box-shadow: var(--box-shadow-1);"
     >
       <div class="w-full flex flex-col items-center">
-        <SvgIconsLogo class="text-5em" />
+        <!-- <SvgIconsLogo class="text-5em" /> -->
+        <img :src="logo" class="w-10 h-10 rounded-xl">
         <n-h3 class="text-2xl font-semibold">
           {{ appName }}
         </n-h3>
