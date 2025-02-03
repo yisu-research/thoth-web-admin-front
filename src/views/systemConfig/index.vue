@@ -26,7 +26,7 @@ async function getConfig() {
 }
 
 function handleClose() {
-  configForm.value = null
+  // configForm.value = null
   showModal.value = false
 }
 
@@ -42,13 +42,14 @@ function openModal() {
 // }
 
 async function handleSubmit() {
+  // console.log('configForm.value', configForm.value)
   try {
     const { isSuccess } = await fetchUpdateSystemConfig(configForm.value)
     if (!isSuccess)
       return
 
-    getConfig()
     handleClose()
+    getConfig()
   }
   catch (error) {
     console.error(error)
