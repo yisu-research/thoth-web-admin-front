@@ -7,6 +7,6 @@ export const serviceConfig: Record<ServiceEnvType, Record<string, string>> = {
     url: 'http://8.142.167.132:3002/api/',
   },
   prod: {
-    url: 'https://thoth-admin.yisukeyan.com/api/',
+    url: '/api/',
   },
 }
