@@ -6,7 +6,7 @@ interface Ilogin {
 }
 
 export function fetchLogin(data: Ilogin) {
-  const methodInstance = request.Post<Service.ResponseResult<Api.Login.Info>>('/tokens', data)
+  const methodInstance = request.Post<Service.ResponseResult<any>>('/tokens', data)
   methodInstance.meta = {
     authRole: null,
   }
@@ -14,7 +14,7 @@ export function fetchLogin(data: Ilogin) {
 }
 
 export function fetchUserInfo() {
-  const methodInstance = request.Get(`/admin/users/current`)
+  const methodInstance = request.Get<Service.ResponseResult<any>>(`/admin/users/current`)
   return methodInstance
 }
 

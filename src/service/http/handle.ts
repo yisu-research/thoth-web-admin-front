@@ -59,7 +59,7 @@ export function handleServiceResult(data: any, isSuccess: boolean = true) {
   const result = {
     isSuccess,
     errorType: null,
-    ...data,
+    data,
   }
   return result
 }

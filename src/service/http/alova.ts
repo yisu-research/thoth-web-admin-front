@@ -72,21 +72,8 @@ export function createAlovaInstance(
             return response.blob()
 
           // 返回json数据
-          try {
-            const apiData = await response.json()
-            return handleServiceResult(apiData)
-          }
-          catch (error) {
-            console.error(error)
-            return handleServiceResult(null)
-          }
-          // 请求成功
-          // if (apiData[_backendConfig.codeKey] === _backendConfig.successCode)
-          //   return handleServiceResult(apiData)
-
-          // // 业务请求失败
-          // const errorResult = handleBusinessError(apiData, _backendConfig)
-          // return handleServiceResult(errorResult, false)
+          const apiData = await response.json()
+          return handleServiceResult(apiData)
         }
         // 接口请求失败
         const errorResult = handleResponseError(response)

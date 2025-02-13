@@ -2,6 +2,7 @@
 import type { DataTableColumns } from 'naive-ui'
 import { ThothSmartAvatar } from '@/components/common'
 import { fetchAuditUser, fetchCreateUser, fetchDeleteUser, fetchUpdateUserInfo, fetchUsers } from '@/service'
+import dayjs from 'dayjs'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag, NTime } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import UserModal from './components/UserModal/index.vue'
@@ -16,7 +17,7 @@ const pagination = ref({
 async function getUsers() {
   try {
     usersLoading.value = true
-    const { isSuccess, ...data } = await fetchUsers(pagination.value)
+    const { isSuccess, data } = await fetchUsers(pagination.value)
 
     if (!isSuccess)
       return
@@ -84,8 +85,8 @@ const columns: DataTableColumns<Entity.User> = [
           onUpdate:value={(value: boolean) => row.id && handleAuditUser(row.id, value)}
         >
           {{
-            checked: () => '已审核',
-            unchecked: () => '未审核',
+            checked: () => 'Approved',
+            unchecked: () => 'Unapproved',
           }}
         </NSwitch>
       )
@@ -96,7 +97,7 @@ const columns: DataTableColumns<Entity.User> = [
     align: 'center',
     key: 'created_at',
     render: (row) => {
-      return (<NTime time={row.created_at} type="datetime" />)
+      return (<NTime time={dayjs(row.created_at).toDate()} type="datetime" />)
     },
   },
   {
@@ -104,7 +105,7 @@ const columns: DataTableColumns<Entity.User> = [
     align: 'center',
     key: 'updated_at',
     render: (row) => {
-      return (<NTime time={row.updated_at} type="relative" />)
+      return (<NTime time={dayjs(row.updated_at).toDate()} type="relative" />)
     },
   },
   {

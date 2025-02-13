@@ -54,27 +54,37 @@ export const useAuthStore = defineStore('auth-store', {
     /* 用户登录 */
     async login(account: string, password: string) {
       try {
-        const { isSuccess, token } = await fetchLogin({ account, password })
+        const { isSuccess, data } = await fetchLogin({ account, password })
 
         if (!isSuccess)
           return
 
-        await this.handleToken({ accessToken: token })
+        await this.handleToken({ accessToken: data.token })
 
-        const { isSuccess: isSuccessUserInfo, ...data } = await fetchUserInfo()
-
-        if (!isSuccessUserInfo)
-          return
-
-        // const data: any = {
-        //   accessToken: token,
-        // }
+        const userInfo = await this.getUserInfo(data.token)
 
         // 处理登录信息
-        await this.handleLoginInfo(data)
+        await this.handleLoginInfo(userInfo)
       }
       catch (e) {
         console.warn('[Login Error]:', e)
+      }
+    },
+
+    async getUserInfo(token: string) {
+      try {
+        const { isSuccess, data } = await fetchUserInfo()
+        if (!isSuccess)
+          return null
+
+        const userInfo = { ...data, token }
+        this.userInfo = userInfo
+
+        return userInfo
+      }
+      catch (error) {
+        console.error('[Get User Info Error]:', error)
+        return null
       }
     },
 
@@ -87,8 +97,6 @@ export const useAuthStore = defineStore('auth-store', {
     async handleLoginInfo(data: Api.Login.Info) {
       // 将token和userInfo保存下来
       local.set('userInfo', data)
-
-      this.userInfo = data
 
       // 添加路由和菜单
       const routeStore = useRouteStore()
