@@ -1,4 +1,5 @@
 import { useEcharts } from '@/hooks'
+import { fetchCostConsume } from '@/service/api/cost'
 import Decimal from 'decimal.js'
 import { ref } from 'vue'
 
@@ -68,59 +69,22 @@ export function useCostChart() {
     barOptions.value.xAxis[0].data = []
     try {
       loading.value = true
-      //   [
-      //     {
-      //         "date": "2025-02-09",
-      //         "cost": "1.0"
-      //     },
-      //     {
-      //         "date": "2025-02-10",
-      //         "cost": "1.1"
-      //     }
-      // ]
-      // const res = await fetchCostConsume({
-      //   start_time: dateRange.value?.[0] || '',
-      //   end_time: dateRange.value?.[1] || '',
-      // })
-      const res = {
-        data: [
-          {
-            date: '2025-02-09',
-            cost: '1.0',
-          },
-          {
-            date: '2025-02-10',
-            cost: '1.1',
-          },
-          {
-            date: '2025-02-11',
-            cost: '2.4',
-          },
-          {
-            date: '2025-02-12',
-            cost: '13.6',
-          },
-          {
-            date: '2025-02-13',
-            cost: '4.1',
-          },
-          {
-            date: '2025-02-14',
-            cost: '7.4',
-          },
-        ],
+      const { isSuccess, data } = await fetchCostConsume({
+        start_time: dateRange.value?.[0] || '',
+        end_time: dateRange.value?.[1] || '',
+      })
+      if (!isSuccess) {
+        return
       }
-      await new Promise(resolve => setTimeout(resolve, 1000))
-
       barOptions.value = {
         ...barOptions.value,
         xAxis: [{
           ...barOptions.value.xAxis[0],
-          data: res.data.map((item: any) => item.date),
+          data: data.map((item: any) => item.date),
         }],
         series: [{
           ...barOptions.value.series[0],
-          data: res.data.map((item: any) => new Decimal(item.cost).toNumber()),
+          data: data.map((item: any) => new Decimal(item.cost ? item.cost : 0).toNumber()),
         }],
       }
     }

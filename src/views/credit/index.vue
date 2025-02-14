@@ -15,11 +15,13 @@ const { costUserColumns, costUser, costUserPagination, getCostUser } = useCostUs
 const { costDetailColumns, costDetail, costDetailPagination, getCostDetail, costDetailLoading, costDetailTableRef, rowKey } = useCostDetail()
 const { costOrderColumns, costOrder, costOrderPagination, getCostOrder, costOrderLoading, costOrderTableRef, rowKey: costOrderRowKey } = useCostOrder()
 onMounted(() => {
-  fetchBalance()
-  getCostModel()
-  getCostUser()
-  getCostDetail()
-  getCostOrder()
+  Promise.all([
+    fetchBalance(),
+    getCostModel(),
+    getCostUser(),
+    getCostDetail(),
+    getCostOrder(),
+  ])
 })
 </script>
 
@@ -30,7 +32,7 @@ onMounted(() => {
       <h2 class="text-lg font-bold text-zinc-500">
         剩余额度:
       </h2>
-      <span class="text-xl font-bold text-zinc-600">{{ `$${balance?.cost} / $${balance?.balance}` }}</span>
+      <span class="text-xl font-bold text-zinc-600">{{ `$${balance?.balance}` }}</span>
     </div>
 
     <div class="my-4 border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">

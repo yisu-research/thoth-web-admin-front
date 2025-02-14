@@ -3,6 +3,7 @@ import type { DataTableColumns } from 'naive-ui'
 import { ThothSmartAvatar } from '@/components/common'
 import { fetchAuditUser, fetchCreateUser, fetchDeleteUser, fetchUpdateUserInfo, fetchUsers } from '@/service'
 import dayjs from 'dayjs'
+import Decimal from 'decimal.js'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag, NTime } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import UserModal from './components/UserModal/index.vue'
@@ -45,6 +46,8 @@ const columns: DataTableColumns<Entity.User> = [
     title: 'Avatar',
     align: 'center',
     key: 'avatar',
+    width: 80,
+    fixed: 'left',
     render: (row) => {
       return h(ThothSmartAvatar, {
         name: row.username,
@@ -58,11 +61,25 @@ const columns: DataTableColumns<Entity.User> = [
     title: 'Username',
     align: 'center',
     key: 'username',
+    width: 180,
+    fixed: 'left',
   },
   {
     title: 'Email',
     align: 'center',
     key: 'email',
+  },
+  {
+    title: 'Quota',
+    align: 'center',
+    key: 'quota',
+    render: (row) => {
+      return h('span', {
+        class: 'text-zinc-500',
+      }, [
+        `${new Decimal(row.quota).toNumber()}`,
+      ])
+    },
   },
   {
     title: 'Role',
@@ -112,11 +129,17 @@ const columns: DataTableColumns<Entity.User> = [
     title: 'Actions',
     align: 'center',
     key: 'actions',
+    width: 180,
+    fixed: 'right',
     render: (row) => {
       return (
         <NSpace justify="center">
           <NButton
             size="small"
+            strong
+            secondary
+            round
+            type="info"
             onClick={() => handleEditTable(row)}
           >
             Edit
@@ -124,7 +147,7 @@ const columns: DataTableColumns<Entity.User> = [
           <NPopconfirm onPositiveClick={() => handleDeleteUser(row.id)}>
             {{
               default: () => 'Confirm delete',
-              trigger: () => <NButton size="small">Delete</NButton>,
+              trigger: () => <NButton size="small" strong secondary round type="error">Delete</NButton>,
             }}
           </NPopconfirm>
         </NSpace>
@@ -234,7 +257,7 @@ async function handleDeleteUser(id: number) {
       </NButton>
     </div>
     <NCard>
-      <NDataTable :columns="columns" :data="users" :loading="usersLoading" />
+      <NDataTable :columns="columns" :data="users" :loading="usersLoading" :scroll-x="1800" />
       <Pagination :count="userTotal" class="mt-4" @change="changePage" />
       <UserModal v-model:visible="visible" :type="modalType" :modal-data="editData" @submit="handleSubmit" />
     </NCard>

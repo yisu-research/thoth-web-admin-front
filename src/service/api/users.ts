@@ -20,7 +20,7 @@ export function fetchUserDetail(data: { id: number }) {
 
 // 编辑用户
 export function fetchUpdateUserInfo(data: any) {
-  const methodInstance = request.Put<Service.ResponseResult<any>>('/admin/users', data)
+  const methodInstance = request.Put<Service.ResponseResult<any>>(`/admin/users/${data.id}`, data)
   return methodInstance
 }
 

@@ -1,3 +1,4 @@
+import { fetchCostModel } from '@/service/api/cost'
 import { computed, h, ref } from 'vue'
 
 export function useCostModel() {
@@ -39,85 +40,14 @@ export function useCostModel() {
 
   async function getCostModel() {
     try {
-      // const res = await fetchCostModel()
-      const res = {
-        data: [
-          {
-            engine_label: 'GPT-4o',
-            total_cost: '7.0',
-            average_cost: '3.5',
-            proportion: 69,
-          },
-          {
-            engine_label: 'GPT-4o-mini',
-            total_cost: '3.1',
-            average_cost: '3.1',
-            proportion: 31,
-          },
-          {
-            engine_label: 'GPT-3.5-turbo',
-            total_cost: '2.8',
-            average_cost: '1.4',
-            proportion: 25,
-          },
-          {
-            engine_label: 'Claude-2',
-            total_cost: '4.2',
-            average_cost: '2.1',
-            proportion: 38,
-          },
-          {
-            engine_label: 'PaLM-2',
-            total_cost: '3.6',
-            average_cost: '1.8',
-            proportion: 32,
-          },
-          {
-            engine_label: 'DALL-E 3',
-            total_cost: '5.4',
-            average_cost: '2.7',
-            proportion: 48,
-          },
-          {
-            engine_label: 'Stable Diffusion XL',
-            total_cost: '4.8',
-            average_cost: '2.4',
-            proportion: 43,
-          },
-          {
-            engine_label: 'Llama-2',
-            total_cost: '2.4',
-            average_cost: '1.2',
-            proportion: 21,
-          },
-          {
-            engine_label: 'Mistral-7B',
-            total_cost: '1.8',
-            average_cost: '0.9',
-            proportion: 16,
-          },
-          {
-            engine_label: 'Falcon-40B',
-            total_cost: '3.9',
-            average_cost: '1.95',
-            proportion: 35,
-          },
-          {
-            engine_label: 'CodeLlama-34B',
-            total_cost: '4.5',
-            average_cost: '2.25',
-            proportion: 40,
-          },
-          {
-            engine_label: 'Anthropic Claude-instant',
-            total_cost: '2.2',
-            average_cost: '1.1',
-            proportion: 20,
-          },
-        ],
+      const { isSuccess, data } = await fetchCostModel()
+
+      if (!isSuccess) {
+        costModel.value = []
       }
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      costModel.value = res.data
+      else {
+        costModel.value = data
+      }
     }
     catch (error) {
       console.error('[Get Cost Model Error]:', error)

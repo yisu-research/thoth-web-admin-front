@@ -7,6 +7,7 @@ const config = ref<any>({
   logo: '',
   admin_email: '',
   website_url: '',
+  quota: 0,
 })
 const configForm = ref<any>(null)
 const showModal = ref(false)
@@ -15,7 +16,7 @@ const showModal = ref(false)
 
 async function getConfig() {
   try {
-    const { isSuccess, ...data }: any = await fetchSystemConfig()
+    const { isSuccess, data }: any = await fetchSystemConfig()
     if (!isSuccess)
       return
 
@@ -24,6 +25,7 @@ async function getConfig() {
       logo: data.logo?.url || '',
       admin_email: data.admin_email,
       website_url: data.website_url,
+      quota: data.quota,
     }
   }
   catch (error) {
@@ -61,7 +63,11 @@ async function handleSubmit() {
   formData.append('system_name', configForm.value.system_name)
   formData.append('admin_email', configForm.value.admin_email)
   formData.append('website_url', configForm.value.website_url)
-  formData.append('logo', configForm.value.logo)
+  if (configForm.value.logo instanceof File) {
+    formData.append('logo', configForm.value.logo)
+  }
+  formData.append('quota', configForm.value.quota)
+
   try {
     const { isSuccess } = await fetchUpdateSystemConfig(formData)
     if (!isSuccess)
@@ -111,6 +117,9 @@ onMounted(() => {
             <NFormItem label="Website URL" path="website_url">
               <NInput v-model:value="configForm.website_url" />
             </NFormItem>
+            <NFormItem label="Quota" path="quota">
+              <NInput v-model:value="configForm.quota" type="number" />
+            </NFormItem>
           </NForm>
 
           <div>
@@ -146,6 +155,12 @@ onMounted(() => {
           Website URL
         </template>
         {{ config.website_url }}
+      </n-descriptions-item>
+      <n-descriptions-item :span="6">
+        <template #label>
+          Quota
+        </template>
+        {{ config.quota }}
       </n-descriptions-item>
     </n-descriptions>
   </div>

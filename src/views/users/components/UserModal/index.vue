@@ -22,9 +22,7 @@ interface Emits {
 const defaultFormModal: any = {
   username: '',
   email: '',
-  password: '',
-  password_confirmation: '',
-  avatar_url: '',
+  quota: 0,
 }
 
 const formModel = ref({ ...defaultFormModal })
@@ -65,7 +63,11 @@ function UpdateFormModelByModalType() {
 }
 
 function handleSubmit() {
-  emit('submit', type, formModel.value)
+  // 去除 formModel 中的空值
+  const formData = Object.fromEntries(
+    Object.entries(formModel.value).filter(([_, value]) => value !== null && value !== undefined),
+  )
+  emit('submit', type, formData)
 }
 
 watch(
@@ -91,26 +93,27 @@ watch(
     }"
   >
     <n-form
-      label-placement="left"
+      label-placement="top"
       :model="formModel"
       label-align="left"
       :label-width="80"
       @submit.prevent="handleSubmit"
     >
-      <n-grid :cols="24" :x-gap="18">
-        <n-form-item-grid-item :span="12" label="Username" path="username">
-          <n-input v-model:value="formModel.username" />
-        </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="Email" path="email">
-          <n-input v-model:value="formModel.email" />
-        </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="Password" path="password">
-          <n-input v-model:value="formModel.password" />
-        </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="Password Confirmation" path="password_confirmation">
-          <n-input v-model:value="formModel.password_confirmation" />
-        </n-form-item-grid-item>
-      </n-grid>
+      <n-form-item label="Username" path="username" width="200px">
+        <n-input v-model:value="formModel.username" />
+      </n-form-item>
+      <n-form-item label="Email" path="email">
+        <n-input v-model:value="formModel.email" />
+      </n-form-item>
+      <n-form-item v-if="type === 'add'" label="Password" path="password">
+        <n-input v-model:value="formModel.password" type="password" show-password-on="click" />
+      </n-form-item>
+      <n-form-item v-if="type === 'add'" label="Password Confirmation" path="password_confirmation">
+        <n-input v-model:value="formModel.password_confirmation" type="password" show-password-on="click" />
+      </n-form-item>
+      <n-form-item v-if="type === 'edit'" label="Quota" path="quota">
+        <n-input v-model:value="formModel.quota" type="number" />
+      </n-form-item>
     </n-form>
     <template #action>
       <n-space justify="center">

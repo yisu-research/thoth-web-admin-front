@@ -1,3 +1,4 @@
+import { fetchCostBalance } from '@/service/api/cost'
 import { ref } from 'vue'
 
 export function useCostBalance() {
@@ -10,19 +11,8 @@ export function useCostBalance() {
   const fetchBalance = async () => {
     try {
       balanceLoading.value = true
-      // const { isSuccess, data } = await fetchCostBalance()
-      // Mock API response
-      const mockResponse = {
-        isSuccess: true,
-        data: {
-          balance: '1000',
-          cost: '500',
-        },
-      }
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const { isSuccess, data } = await fetchCostBalance()
 
-      const { isSuccess, data } = mockResponse
       if (!isSuccess) {
         balance.value = {
           balance: '0',
@@ -32,6 +22,9 @@ export function useCostBalance() {
       else {
         balance.value = data
       }
+    }
+    catch (error) {
+      console.error('[Get Cost Balance Error]:', error)
     }
     finally {
       balanceLoading.value = false
