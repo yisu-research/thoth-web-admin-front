@@ -46,14 +46,14 @@ export function useCostChart() {
       axisTick: { show: false },
     }],
     series: [{
-      name: '额度消耗',
+      name: 'Quota Consumption',
       type: 'bar',
       barWidth: 20,
       tooltip: { show: false },
       label: {
         show: true,
         position: 'top',
-        color: '#fff',
+        color: '#23c891',
       },
       itemStyle: {
         color: () => '#23c891',

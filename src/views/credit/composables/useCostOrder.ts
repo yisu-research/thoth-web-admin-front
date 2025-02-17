@@ -4,9 +4,9 @@ import { computed, ref } from 'vue'
 
 export function useCostOrder() {
   const costOrderColumns = computed(() => [
-    { title: '时间', key: 'created_at', render: (row: any) => dayjs(row.created_at).format('YYYY-MM-DD HH:mm:ss') },
-    { title: '额度', key: 'quota' },
-    { title: '备注', key: 'description' },
+    { title: 'Time', key: 'created_at', render: (row: any) => dayjs(row.created_at).format('YYYY-MM-DD HH:mm:ss') },
+    { title: 'Quota', key: 'quota' },
+    { title: 'Description', key: 'description' },
   ])
 
   const costOrderLoading = ref(false)

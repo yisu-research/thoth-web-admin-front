@@ -1,6 +1,7 @@
 <script setup lang="tsx">
 import type { DataTableColumns } from 'naive-ui'
 import { fetchModelList, fetchUpdateModel } from '@/service'
+import dayjs from 'dayjs'
 import { NSpace, NSwitch } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
@@ -56,7 +57,7 @@ const columns: DataTableColumns<any> = [
     render: (row) => {
       return h('img', {
         src: row.icon_url,
-        class: 'size-10 rounded-xl object-cover p-1 flex-shrink-0',
+        class: 'size-10 rounded-xl object-cover p-1 flex-shrink-0 mx-auto',
       })
     },
   },
@@ -89,7 +90,7 @@ const columns: DataTableColumns<any> = [
   {
     title: 'Tags',
     align: 'center',
-    width: 300,
+    width: 160,
     key: 'tags',
     render: (row) => {
       return h('div', {
@@ -105,6 +106,34 @@ const columns: DataTableColumns<any> = [
     width: 300,
   },
   {
+    title: 'Check Time',
+    align: 'center',
+    key: 'updated_at',
+    width: 160,
+    fixed: 'right',
+    render: (row) => {
+      return h('div', {
+        class: 'text-zinc-500',
+      }, [dayjs(row.updated_at).format('YYYY-MM-DD HH:mm')])
+    },
+  },
+  {
+    title: 'Status',
+    align: 'center',
+    key: 'check_status',
+    width: 100,
+    fixed: 'right',
+    render: (row) => {
+      return row.is_valid
+        ? h('div', {
+            class: 'text-emerald-500',
+          }, ['Valid'])
+        : h('div', {
+            class: 'text-red-500',
+          }, ['Invalid'])
+    },
+  },
+  {
     title: 'Enabled',
     align: 'center',
     key: 'is_enable',
@@ -117,6 +146,7 @@ const columns: DataTableColumns<any> = [
       })
     },
   },
+
   {
     title: 'Recommended',
     align: 'center',

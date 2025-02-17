@@ -3,11 +3,11 @@ import { computed, h, ref } from 'vue'
 
 export function useCostUser() {
   const costUserColumns = computed(() => [
-    { title: '用户', key: 'username' },
-    { title: '额度/天', key: 'average_cost' },
-    { title: '总额度', key: 'total_cost' },
+    { title: 'User', key: 'username' },
+    { title: 'Quota/Day', key: 'average_cost' },
+    { title: 'Total Quota', key: 'total_cost' },
     {
-      title: '总额度占比(%)',
+      title: 'Total Quota Ratio(%)',
       key: 'proportion',
       render: (row: any) => {
         return h('div', {

@@ -2,37 +2,37 @@
 import dayjs from 'dayjs'
 import { computed, ref, toRefs } from 'vue'
 
-// 组件属性定义
+// Component props definition
 const props = defineProps({
   dateRange: {
-    type: [Array, null], // 日期范围数组或 null
+    type: [Array, null], // Date range array or null
     default: null,
   },
 })
 
-// 定义组件事件
+// Define component events
 const emit = defineEmits(['change'])
 
-// 解构 props 中的 dateRange 并转为响应式引用
+// Destructure dateRange from props and convert to reactive reference
 const { dateRange } = toRefs(props)
 
-// 响应式状态
-const selectedQuick = ref('') // 当前选中的快捷选项
-const range = ref(null) // 静态时间选择器的值
+// Reactive state
+const selectedQuick = ref('') // Currently selected quick option
+const range = ref(null) // Static time picker value
 
-// 快捷选项配置
+// Quick options configuration
 const quickOptions = [
-  { label: '昨天', value: 'yesterday' },
-  { label: '最近3天', value: 'last3days' },
-  { label: '最近7天', value: 'last7days' },
-  { label: '最近30天', value: 'last30days' },
-  { label: '本小时', value: 'currentHour' },
-  { label: '当天', value: 'today' },
-  { label: '本周', value: 'currentWeek' },
-  { label: '本月', value: 'currentMonth' },
+  { label: 'Yesterday', value: 'yesterday' },
+  { label: 'Last 3 Days', value: 'last3days' },
+  { label: 'Last 7 Days', value: 'last7days' },
+  { label: 'Last 30 Days', value: 'last30days' },
+  { label: 'Current Hour', value: 'currentHour' },
+  { label: 'Today', value: 'today' },
+  { label: 'Current Week', value: 'currentWeek' },
+  { label: 'Current Month', value: 'currentMonth' },
 ]
 
-// 格式化日期范围显示
+// Format date range display
 const formatDateRange = computed(() => {
   if (!dateRange.value) {
     return ''
@@ -42,8 +42,8 @@ const formatDateRange = computed(() => {
 })
 
 /**
- * 处理快捷选项选择
- * @param {string} value - 选中的快捷选项值
+ * Handle quick option selection
+ * @param {string} value - Selected quick option value
  */
 function handleQuickSelect(value) {
   selectedQuick.value = value
@@ -51,7 +51,7 @@ function handleQuickSelect(value) {
   const start = new Date()
   const end = new Date()
 
-  // 根据不同的快捷选项设置对应的时间范围
+  // Set corresponding time range based on different quick options
   const setTimeRange = {
     yesterday: () => {
       start.setDate(start.getDate() - 1)
@@ -95,10 +95,10 @@ function handleQuickSelect(value) {
     },
   }
 
-  // 执行对应的时间范围设置函数
+  // Execute corresponding time range setting function
   setTimeRange[value]?.()
 
-  // 格式化并发送新的日期范围
+  // Format and emit new date range
   const newDateRange = [
     dayjs(start).format('YYYY-MM-DD HH:mm:ss'),
     dayjs(end).format('YYYY-MM-DD HH:mm:ss'),
@@ -106,13 +106,13 @@ function handleQuickSelect(value) {
 
   emit('change', newDateRange, true)
 
-  // 清空静态时间选择器的值
+  // Clear static time picker value
   range.value = null
 }
 
 /**
- * 处理清空操作
- * 清空后默认选中最近30天
+ * Handle clear operation
+ * Select last 30 days by default after clearing
  */
 function handleClear() {
   range.value = null
@@ -131,8 +131,8 @@ function handleClear() {
 }
 
 /**
- * 处理时间选择器显示状态变化
- * @param {boolean} visible - 选择器是否可见
+ * Handle time picker display state change
+ * @param {boolean} visible - Whether the picker is visible
  */
 function showTimePicker(visible) {
   if (!range.value || visible) {
@@ -145,22 +145,22 @@ function showTimePicker(visible) {
 
   emit('change', [startDate, endDate], true)
 
-  // 清空快捷选项的选中状态
+  // Clear quick option selection state
   selectedQuick.value = ''
 }
 
 /**
- * 处理时间选择器清空
+ * Handle time picker clear
  */
 function handleTimePickerClear() {
   range.value = null
   handleClear()
 }
 
-// 监听 dateRange 变化
+// Watch dateRange changes
 watch(dateRange, (newVal) => {
   if (!newVal) {
-    // dateRange 为 null 时,默认选中最近30天
+    // Select last 30 days by default when dateRange is null
     selectedQuick.value = 'last30days'
 
     const start = new Date()
@@ -179,10 +179,10 @@ watch(dateRange, (newVal) => {
 
 <template>
   <div>
-    <!-- 快捷选项 -->
+    <!-- Quick Options -->
     <n-space>
       <h2 class="text-lg font-bold">
-        快捷选项
+        Quick Options
       </h2>
       <n-button-group>
         <n-button
@@ -196,15 +196,15 @@ watch(dateRange, (newVal) => {
       </n-button-group>
     </n-space>
 
-    <!-- 静态时间选择 -->
+    <!-- Static Time Selection -->
     <div style="margin-top: 16px">
       <span class="static-time">
-        <h2 class="text-lg font-bold text-zinc-800">静态时间</h2>
+        <h2 class="text-lg font-bold text-zinc-800">Static Time</h2>
         <n-tooltip trigger="hover">
           <template #trigger>
             <nova-icon icon="solar:question-circle-broken" class="text-zinc-500" :size="20" />
           </template>
-          选择特定的时间范围
+          Select a specific time range
         </n-tooltip>
       </span>
       <n-date-picker
@@ -212,17 +212,17 @@ watch(dateRange, (newVal) => {
         type="datetimerange"
         clearable
         style="margin-top: 8px"
-        start-placeholder="请选择开始时间"
-        end-placeholder="请选择结束时间"
+        start-placeholder="Select start time"
+        end-placeholder="Select end time"
         @update-show="showTimePicker"
         @clear="handleTimePickerClear"
       />
     </div>
 
-    <!-- 底部已选时间展示和操作按钮 -->
+    <!-- Bottom Selected Time Display and Action Buttons -->
     <div class="footer">
       <span>
-        已选时间: <span class="text-primaryGreen text-md ml-2 text-16px">{{ formatDateRange }}</span>
+        Selected Time: <span class="text-primaryGreen text-md ml-2 text-16px">{{ formatDateRange }}</span>
       </span>
     </div>
   </div>

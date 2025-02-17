@@ -4,13 +4,13 @@ import { computed, ref } from 'vue'
 
 export function useCostDetail() {
   const costDetailColumns = computed(() => [
-    { title: '时间', key: 'created_at', render: (row: any) => dayjs(row.created_at).format('YYYY-MM-DD HH:mm:ss') },
-    { title: '用户', key: 'username' },
-    { title: '模型', key: 'engine_label' },
-    { title: '输入 token', key: 'prompt_tokens' },
-    { title: '生成 token', key: 'completion_tokens' },
+    { title: 'Time', key: 'created_at', render: (row: any) => dayjs(row.created_at).format('YYYY-MM-DD HH:mm:ss') },
+    { title: 'User', key: 'username' },
+    { title: 'Model', key: 'engine_label' },
+    { title: 'Input Tokens', key: 'prompt_tokens' },
+    { title: 'Output Tokens', key: 'completion_tokens' },
     {
-      title: '消耗费用',
+      title: 'Cost',
       key: 'cost',
       render: (row: any) => `$ ${row.cost}`,
     },

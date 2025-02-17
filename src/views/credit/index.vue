@@ -27,17 +27,17 @@ onMounted(() => {
 
 <template>
   <div class="p-4">
-    <!-- 积分管理 -->
+    <!-- Credit Management -->
     <div class="flex items-center gap-4 w-full border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">
       <h2 class="text-lg font-bold text-zinc-500">
-        剩余额度:
+        Remaining Balance:
       </h2>
       <span class="text-xl font-bold text-zinc-600">{{ `$${balance?.balance}` }}</span>
     </div>
 
     <div class="my-4 border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">
       <h2 class="text-lg text-zinc-500 mb-4 font-bold">
-        额度消耗
+        Credit Consumption
       </h2>
       <div class="">
         <TimePickerContainer
@@ -48,12 +48,12 @@ onMounted(() => {
           <div v-if="loading">
             <n-spin>
               <template #description>
-                加载中...
+                Loading...
               </template>
             </n-spin>
           </div>
           <div v-else-if="!loading && (!barOptions.series[0].data?.length)">
-            <n-empty description="暂无数据" />
+            <n-empty description="No Data" />
           </div>
           <div v-show="!loading && barOptions.series[0].data?.length" class="h-400px w-full">
             <div
@@ -67,7 +67,7 @@ onMounted(() => {
 
     <div class="my-4 border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">
       <h2 class="text-lg text-zinc-500 mb-4 font-bold">
-        模型视角
+        Model View
       </h2>
       <n-data-table
         :columns="costModelColumns as any"
@@ -79,7 +79,7 @@ onMounted(() => {
 
     <div class="my-4 border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">
       <h2 class="text-lg text-zinc-500 mb-4 font-bold">
-        用户视角
+        User View
       </h2>
       <n-data-table
         :columns="costUserColumns as any"
@@ -91,7 +91,7 @@ onMounted(() => {
 
     <div class="my-4 border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">
       <h2 class="text-lg text-zinc-500 mb-4 font-bold">
-        消耗明细
+        Consumption Details
       </h2>
       <n-data-table
         ref="costDetailTableRef"
@@ -107,7 +107,7 @@ onMounted(() => {
 
     <div class="my-4 border rounded-xl p-4 border-teal-800/10 shadow-zinc-200 shadow-sm">
       <h2 class="text-lg text-zinc-500 mb-4 font-bold">
-        充值记录
+        Recharge Records
       </h2>
       <n-data-table
         ref="costOrderTableRef"
