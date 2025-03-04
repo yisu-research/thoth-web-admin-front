@@ -71,10 +71,25 @@ export function createAlovaInstance(
           if (method.meta?.isBlob)
             return response.blob()
 
-          // 返回json数据
-          const apiData = await response.json()
-          return handleServiceResult(apiData)
+          // 检查响应体是否为空
+          const text = await response.text()
+          if (text) {
+            const apiData = JSON.parse(text)
+            return handleServiceResult(apiData)
+          }
+          else {
+            console.warn('响应体为空')
+            return handleServiceResult({}, false)
+          }
         }
+
+        if (status === 500) {
+          // 构造错误响应对象
+          return handleServiceResult({
+            message: 'Internal server error, please try again later',
+          }, false)
+        }
+
         // 接口请求失败
         const errorResult = handleResponseError(response)
         return handleServiceResult(errorResult, false)

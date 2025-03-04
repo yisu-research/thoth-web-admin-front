@@ -13,7 +13,10 @@ type ErrorStatus = keyof typeof ERROR_STATUS
  * @param {Response} response
  * @return {*}
  */
-export function handleResponseError(response: Response) {
+export async function handleResponseError(response: Response) {
+  // 解析response
+  const text = await response.text()
+  const apiData = JSON.parse(text)
   const error: Service.RequestError = {
     errorType: 'Response Error',
     code: 0,
@@ -21,7 +24,8 @@ export function handleResponseError(response: Response) {
     data: null,
   }
   const errorCode: ErrorStatus = response.status as ErrorStatus
-  const message = ERROR_STATUS[errorCode] || ERROR_STATUS.default
+  // const message = ERROR_STATUS[errorCode] || ERROR_STATUS.default
+  const message = apiData.message || ERROR_STATUS.default
   Object.assign(error, { code: errorCode, message })
 
   showError(error)
