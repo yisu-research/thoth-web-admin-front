@@ -9,7 +9,7 @@ const { role } = authStore.userInfo!
 const roleList: Entity.RoleType[] = ['super', 'admin', 'user']
 
 function toggleUserRole(role: Entity.RoleType) {
-  authStore.login(role, '123456')
+  authStore.login(role, '123456', 'YiSuKy')
 }
 </script>
 
