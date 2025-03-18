@@ -8,6 +8,9 @@ const config = ref<any>({
   admin_email: '',
   website_url: '',
   quota: 0,
+  currency_display: 'money',
+  exchange_rate: '',
+  registration_approval_mode: 'auto',
 })
 const configForm = ref<any>(null)
 const showModal = ref(false)
@@ -26,6 +29,9 @@ async function getConfig() {
       admin_email: data.admin_email,
       website_url: data.website_url,
       quota: data.quota,
+      currency_display: data.currency_display || 'money',
+      exchange_rate: data.exchange_rate || '',
+      registration_approval_mode: data.registration_approval_mode || 'auto',
     }
   }
   catch (error) {
@@ -67,11 +73,16 @@ async function handleSubmit() {
     formData.append('logo', configForm.value.logo)
   }
   formData.append('quota', configForm.value.quota)
+  formData.append('currency_display', configForm.value.currency_display)
+  formData.append('exchange_rate', configForm.value.exchange_rate)
+  formData.append('registration_approval_mode', configForm.value.registration_approval_mode)
 
   try {
     const { isSuccess } = await fetchUpdateSystemConfig(formData)
     if (!isSuccess)
       return
+
+    window.$message?.success('Update system config successfully')
 
     handleClose()
     getConfig()
@@ -118,7 +129,30 @@ onMounted(() => {
               <NInput v-model:value="configForm.website_url" />
             </NFormItem>
             <NFormItem label="Quota" path="quota">
-              <NInput v-model:value="configForm.quota" type="number" />
+              <NInputNumber v-model:value="configForm.quota" />
+            </NFormItem>
+            <NFormItem label="消费显示模式 (Currency Display)" path="currency_display">
+              <NRadioGroup v-model:value="configForm.currency_display">
+                <NRadio value="money">
+                  money
+                </NRadio>
+                <NRadio value="credits">
+                  credits
+                </NRadio>
+              </NRadioGroup>
+            </NFormItem>
+            <NFormItem label="美元积分转换倍率 (Exchange Rate)" path="exchange_rate">
+              <NInput v-model:value="configForm.exchange_rate" />
+            </NFormItem>
+            <NFormItem label="注册审核模式 (Registration Approval Mode)" path="registration_approval_mode">
+              <NRadioGroup v-model:value="configForm.registration_approval_mode">
+                <NRadio value="auto">
+                  auto
+                </NRadio>
+                <NRadio value="manual">
+                  manual
+                </NRadio>
+              </NRadioGroup>
             </NFormItem>
           </NForm>
 
@@ -161,6 +195,24 @@ onMounted(() => {
           Quota
         </template>
         {{ config.quota }}
+      </n-descriptions-item>
+      <n-descriptions-item :span="3">
+        <template #label>
+          消费显示模式 (Currency Display)
+        </template>
+        {{ config.currency_display }}
+      </n-descriptions-item>
+      <n-descriptions-item :span="3">
+        <template #label>
+          美元积分转换倍率 (Exchange Rate)
+        </template>
+        {{ config.exchange_rate }}
+      </n-descriptions-item>
+      <n-descriptions-item :span="6">
+        <template #label>
+          注册审核模式 (Registration Approval Mode)
+        </template>
+        {{ config.registration_approval_mode }}
       </n-descriptions-item>
     </n-descriptions>
   </div>
