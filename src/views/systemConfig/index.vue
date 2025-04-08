@@ -198,19 +198,19 @@ onMounted(() => {
       </n-descriptions-item>
       <n-descriptions-item :span="3">
         <template #label>
-          消费显示模式 (Currency Display)
+          Currency Display
         </template>
         {{ config.currency_display }}
       </n-descriptions-item>
       <n-descriptions-item :span="3">
         <template #label>
-          美元积分转换倍率 (Exchange Rate)
+          Exchange Rate
         </template>
         {{ config.exchange_rate }}
       </n-descriptions-item>
       <n-descriptions-item :span="6">
         <template #label>
-          注册审核模式 (Registration Approval Mode)
+          Registration Approval Mode
         </template>
         {{ config.registration_approval_mode }}
       </n-descriptions-item>
