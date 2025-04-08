@@ -131,7 +131,7 @@ onMounted(() => {
             <NFormItem label="Quota" path="quota">
               <NInputNumber v-model:value="configForm.quota" />
             </NFormItem>
-            <NFormItem label="消费显示模式 (Currency Display)" path="currency_display">
+            <NFormItem label="Currency Display" path="currency_display">
               <NRadioGroup v-model:value="configForm.currency_display">
                 <NRadio value="money">
                   money
@@ -141,10 +141,10 @@ onMounted(() => {
                 </NRadio>
               </NRadioGroup>
             </NFormItem>
-            <NFormItem label="美元积分转换倍率 (Exchange Rate)" path="exchange_rate">
+            <NFormItem label="Exchange Rate" path="exchange_rate">
               <NInput v-model:value="configForm.exchange_rate" />
             </NFormItem>
-            <NFormItem label="注册审核模式 (Registration Approval Mode)" path="registration_approval_mode">
+            <NFormItem label="Registration Approval Mode" path="registration_approval_mode">
               <NRadioGroup v-model:value="configForm.registration_approval_mode">
                 <NRadio value="auto">
                   auto
